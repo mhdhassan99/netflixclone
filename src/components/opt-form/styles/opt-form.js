@@ -25,7 +25,7 @@ export const Input = styled.input`
 export const Button = styled.button`
     display: flex;
     align-items: center;
-    height: 100%;
+    height: 70px;
     background: #e50914;
     color: white;
     text-transform: uppercase;
@@ -56,7 +56,16 @@ export const Button = styled.button`
     }
 `;
 
-export const Text = styled.p``;
+export const Text = styled.p`
+    font-size: 19.2px;
+    color: white;
+    text-align: center;
+
+    @media (max-width: 600px) {
+        font-size: 16px;
+        line-height: 22px;
+    }
+`;
 
 export const Break = styled.div`
     flex-basis: 100%;
