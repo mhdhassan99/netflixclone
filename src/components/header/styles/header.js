@@ -25,9 +25,6 @@ export const Container = styled.div`
     }
 `;
 
-export const Frame = styled.div`
-
-`;
 
 export const Logo = styled.img`
     height: 32px;
