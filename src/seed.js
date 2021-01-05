@@ -472,13 +472,5 @@ export function seedDatabase(firebase) {
     maturity: '15',
     slug: 'the-notebook',
   });
-  firebase.firestore().collection('films').add({
-    id: getUUID(),
-    title: 'Titanic',
-    description:
-      'Seventeen-year-old Rose hails from an aristocratic family and is set to be married. When she boards the Titanic, she meets Jack Dawson, an artist, and falls in love with him.',
-    genre: 'romance',
-    maturity: '15',
-    slug: 'titanic',
-  });
+
 }
