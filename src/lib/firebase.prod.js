@@ -2,7 +2,8 @@ import Firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-
+//if you uncomment this and refresh it will create duplicate data in firebase 
+// import { seedDatabase } from '../seed';
 
 
 const config = {
@@ -15,5 +16,8 @@ const config = {
 };
 
 const firebase = Firebase.initializeApp(config);
+
+//if you uncomment this and refresh it will create duplicate data in firebase 
+// seedDatabase(firebase);
 
 export { firebase };
