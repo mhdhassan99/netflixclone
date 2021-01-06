@@ -9,7 +9,7 @@ export const Error = styled.div`
 
 `;
 
-export const Base = styled.div`
+export const Base = styled.form`
 
 `;
 
@@ -25,7 +25,7 @@ export const TextSmall = styled.p`
 
 `;
 
-export const Link = styled.div(ReactRouterLink)`
+export const Link = styled(ReactRouterLink)`
     color: white;
     text-decoration: none;
 
