@@ -16,23 +16,39 @@ export const Container = styled.div`
 `;
 
 export const Error = styled.div`
-
+    background: #e87c03;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 0 0 16px;
+    color: white;
+    padding: 15px 20px;
 `;
 
 export const Base = styled.form`
-
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+    width: 100%;
 `;
 
 export const Title = styled.h1`
-
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 28px;
 `;
 
 export const Text = styled.p`
-
+    color: #737373;
+    font-size: 16px;
+    font-weight: 500;
 `;
 
 export const TextSmall = styled.p`
-
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: normal;
+    color: #8c8c8c;
 `;
 
 export const Link = styled(ReactRouterLink)`

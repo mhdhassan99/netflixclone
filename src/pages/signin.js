@@ -37,6 +37,12 @@ export default function Signin() {
                             Sign In
                         </Form.Submit>
                     </Form.Base>
+                    <Form.Text>
+                        New To Netflix? <Form.Link to="/signup">Sign Up Now!</Form.Link>
+                    </Form.Text>
+                    <Form.TextSmall>
+                        This page is protected by google reCAPTCHA to ensure you are not a bot. Learn More.
+                    </Form.TextSmall>
                 </Form>
             </HeaderContainer>
             <FooterContainer/>
