@@ -13,10 +13,45 @@ export default function Signup() {
     const [firstName, setFirstName] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
+    const isInvalid = firstName === '' || password === '' || emailAddress === '';
 
+    const handleSignup = (e) => {
+        e.preventDefault();
+
+    };
 
     return (
-        <p>Hello sign up</p>
+        <HeaderContainer>
+            <Form>
+                <Form.Title>Sign up</Form.Title>
+                {error && <Form.Error>{error}</Form.Error>}
+
+                <Form.Base onSubmit={handleSignup} method="POST">
+                    <Form.Input
+                        placeholder="First name"
+                        value={firstName}
+                        onChange={({ target }) => setFirstName(target.value)}
+                    />
+                    <Form.Input 
+                        placeholder="Email address"
+                        value={emailAddress}
+                        onChange={({ target }) => setEmailAddress(target.value)}
+                    />
+                    <Form.Input
+                        placeholder="Password"
+                        type="password"
+                        value={password}
+                        autoComplete="off"
+                        onChange={({ target }) => setPassword(target.value)}
+                    />
+                    <Form.Submit disabled={isInvalid} type="submit">
+                        Sign Up
+                    </Form.Submit>
+                </Form.Base>
+
+            </Form>
+        </HeaderContainer>
     )
 }
