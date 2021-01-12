@@ -7,7 +7,10 @@ import { Form } from '../components';
 import * as ROUTES from '../constants/routes';
 
 export default function Signin() {
+    
+    const history = useHistory();
     const { firebase } = useContext(FirebaseContext);
+
     const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -22,6 +25,7 @@ export default function Signin() {
             .signInWithEmailAndPassword(emailAddress, password)
             .then(() => {
                 //push to the browser page
+                history.push(ROUTES.BROWSE)
             })
             .catch((error) => {
                 setEmailAddress('');
