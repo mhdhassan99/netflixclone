@@ -13,6 +13,11 @@ export const Background = styled.div`
     }
 `;
 
+export const Group = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
 export const Container = styled.div`
     display: flex;
     margin: 0 56px;
@@ -29,6 +34,16 @@ export const Container = styled.div`
     }
 `;
 
+export const Picture = styled.div`
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    position: relative;
+
+    button {
+        cursor: pointer;
+    }
+`;
 
 export const Logo = styled.img`
     height: 32px;
