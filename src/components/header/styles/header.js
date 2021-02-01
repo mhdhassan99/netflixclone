@@ -95,6 +95,28 @@ export const Dropdown = styled.div`
     }
 `;
 
+export const Search = styled.div`
+    display: flex;
+    align-items: center;
+
+    svg {
+        color: white;
+        cursor: pointer;
+    }
+
+    @media (max-width: 700px) {
+        display: none;
+    }
+`;
+
+export const SearchIcon = styled.button`
+
+`;
+
+export const SearchInput = styled.input`
+
+`;
+
 export const Profile = styled.div`
     display: flex;
     align-items: center;
