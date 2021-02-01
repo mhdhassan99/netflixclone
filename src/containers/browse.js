@@ -6,6 +6,7 @@ import * as ROUTES from '../constants/routes';
 import logo from '../logo.svg';
 
 export function BrowseContainer({ slides }) {
+    const [searchTerm, setSearchTerm] = useState('');
     const [profile, setProfile] = useState({});
     const [loading, setLoading] = useState(true);
 
@@ -33,6 +34,11 @@ export function BrowseContainer({ slides }) {
                     </Header.Group>
 
                     <Header.Group>
+                        <Header.Search
+                            searchTerm={searchTerm}
+                            setSearchTerm={setSearchTerm}
+                        />
+
                         <Header.Profile>
                             <Header.Picture src={user.photoURL} />
                             
