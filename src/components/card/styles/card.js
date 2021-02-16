@@ -80,6 +80,8 @@ export const Feature = styled.div`
     background-position-x: right;
     background-repeat: no-repeat;
     backgroundColor: black;
+    ${'' /* transition: transform 10s; */}
+    
 
     @media (max-width: 1000px) {
         height: auto;
@@ -108,10 +110,16 @@ export const FeatureClose = styled.button`
     cursor: pointer;
     background-color: transparent;
     border: 0;
+    transition: transform 0.5s;
 
     img {
         filter: brightness(0) invert(1)
         width: 24px;
+    }
+
+    &:hover {
+        transform: rotate3d(1, 1, 1, 45deg);
+        
     }
 `;
 
