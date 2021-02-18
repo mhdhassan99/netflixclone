@@ -53,6 +53,13 @@ export const Close = styled.button`
         height: 22px;
         width: 22px;
         background-color: #333;  
+    }
+
+    &:before {
+        transform: rotate(45deg);
+    }
+    &:after {
+        transform: rotate(-45deg);
     }     
 `;
 
