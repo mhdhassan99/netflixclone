@@ -1,13 +1,13 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import faqsData from '../../fixtures/faqs.json';
+import faqsData from '../../fixtures/faqs';
 import { Accordion } from '../../components';
 
 describe('<Accordion />', () => {
   it('renders the <Accordion /> with populated data', () => {
     const { container, getByText } = render(
       <Accordion>
-        <Accordion.Title>Frequently asked questions</Accordion.Title>
+        <Accordion.Title>Frequently Asked Questions</Accordion.Title>
         <Accordion.Frame>
           {faqsData.map((item) => (
             <Accordion.Item key={item.id}>
@@ -19,7 +19,7 @@ describe('<Accordion />', () => {
       </Accordion>
     );
 
-    expect(getByText('Frequently asked questions')).toBeTruthy();
+    expect(getByText('Frequently Asked Questions')).toBeTruthy();
     expect(getByText('What is Netflix?')).toBeTruthy();
     expect(getByText('How much does Netflix cost?')).toBeTruthy();
     expect(getByText('Where can I watch?')).toBeTruthy();
@@ -29,9 +29,9 @@ describe('<Accordion />', () => {
   });
 
   it('opens and closes the <Accordion /> component', () => {
-    const { container, queryByText } = render (
+    const { container, queryByText } = render(
       <Accordion>
-        <Accordion.Title>Frequently asked questions</Accordion.Title>
+        <Accordion.Title>Frequently Asked Questions</Accordion.Title>
         <Accordion.Frame>
           {faqsData.map((item) => (
             <Accordion.Item key={item.id}>
