@@ -2,35 +2,57 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Form } from '../../components';
 
-describe('<Form />', () => {
-    it('renders the <Form /> with populated data', () => {
-        <Form>
-            <Form.Title>Sign In</Form.Title>
-                {error && <Form.Error>{error}</Form.Error>}
+jest.mock('react-router-dom');
 
-                <Form.Base onSubmit={handleSignIn} method="POST">
-                    <Form.Input
-                        placeholder="Email Address"
-                        value={emailAddress}
-                        onChange={({ target }) => setEmailAddress(target.value)}
-                    />
-                    <Form.Input 
-                        autoComplete="off"
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={({ target }) => setPassword(target.value)}
-                    />
-                    <Form.Submit disabled={isInvalid} type="submit">
-                        Sign In
-                    </Form.Submit>
-                </Form.Base>
-                <Form.Text>
-                    New To Netflix? <Form.Link to="/signup">Sign Up Now!</Form.Link>
-                </Form.Text>
-                <Form.TextSmall>
-                    This page is protected by google reCAPTCHA to ensure you are not a bot. Learn More.
-                </Form.TextSmall>
-        </Form>
-    })
-})
+describe('<Form />', () => {
+  it('renders the <Form /> with populated data', () => {
+    const { container, getByText, getByPlaceholderText } = render(
+      <Form>
+
+        <Form.Title>Sign In Now</Form.Title>
+
+        <Form.Base>
+          <Form.Input placeholder="Email address" onChange={() => {}} />
+          <Form.Input type="password" placeholder="Password" onChange={() => {}} />
+          <Form.Submit type="submit" disabled>
+            Sign In
+          </Form.Submit>
+        </Form.Base>
+
+        <Form.Text>
+          New to Netflix? <Form.Link to="/signup">Sign up now.</Form.Link>
+        </Form.Text>
+        <Form.TextSmall>
+          This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more.
+        </Form.TextSmall>
+
+      </Form>
+    );
+
+    expect(
+      getByText("This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more.")
+    ).toBeTruthy();
+
+    expect(getByText('Sign In Now')).toBeTruthy();
+    expect(getByText('Sign In')).toBeTruthy();
+    expect(getByText('Sign In').disabled).toBeTruthy();
+    expect(getByPlaceholderText('Email address')).toBeTruthy();
+    expect(getByPlaceholderText('Password')).toBeTruthy();
+
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('renders the <Form /> with an error', () => {
+    const { container, getByText, queryByText } = render(
+      <Form>
+        <Form.Error>Your email address is already being used</Form.Error>
+        <Form.Submit type="submit">Sign In</Form.Submit>
+      </Form>
+    );
+
+    expect(getByText('Your email address is already being used')).toBeTruthy();
+    expect(queryByText('Sign In').disabled).toBeFalsy();
+    
+    expect(container.firstChild).toMatchSnapshot();
+  });
+});
