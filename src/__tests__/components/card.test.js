@@ -35,82 +35,85 @@ const slideRows = [
 ];
 
 describe('<Card />', () => {
-    it('renders the <Card /> with populated data', () => {
-        const { container, getByText} = render (
-            <Card.Group>
-                {slideRows.map((slideItem) => (
-                    <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
-                        <Card.Title>{slideItem.title}</Card.Title>
-                        <Card.Entities>
-                            {slideItem.data.map((item) => (
-                                <Card.Item key={item.docId} item={item}>
-                                    <Card.Image 
-                                        src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
-                                    />
-                                    <Card.Meta>
-                                        <Card.SubTitle>{item.title}</Card.SubTitle>
-                                        <Card.Text>{item.description}</Card.Text>
-                                    </Card.Meta>
-                                </Card.Item>
-                            ))}
-                        </Card.Entities>
+  it('renders the <Card /> with populated data', () => {
+    const { container, getByText } = render(
+      <Card.Group>
+        {slideRows.map((slideItem) => (
+          <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+            <Card.Title>{slideItem.title}</Card.Title>
+            <Card.Entities>
+              {slideItem.data.map((item) => (
+                <Card.Item key={item.docId} item={item}>
+                  <Card.Image src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`} />
+                  <Card.Meta>
+                    <Card.SubTitle>{item.title}</Card.SubTitle>
+                    <Card.Text>{item.description}</Card.Text>
+                  </Card.Meta>
+                </Card.Item>
+              ))}
+            </Card.Entities>
+            <Card.Feature category={category}>
+              <Player>
+                <Player.Button />
+                <Player.Video />
+              </Player>
+            </Card.Feature>
+          </Card>
+        ))}
+      </Card.Group>
+    );
 
-                        <Card.Feature category={category}>
-                            <Player>
-                                <Player.Button />
-                                <Player.Video src="/videos/bunny.mp4"/>
-                            </Player>
-                        </Card.Feature>
+    expect(getByText('Documentaries')).toBeTruthy();
+    expect(getByText('Tiger King')).toBeTruthy();
+    expect(getByText('Tiger King description')).toBeTruthy();
 
-                    </Card>
-                ))}
-            </Card.Group>
-        );
+    expect(getByText('Feel Good')).toBeTruthy();
+    expect(getByText('Juno')).toBeTruthy();
+    expect(getByText('Juno description')).toBeTruthy();
+    expect(container.firstChild).toMatchSnapshot();
+  });
 
-        expect(getByText('Documentaries')).toBeTruthy();
-        expect(getByText('Tiger King')).toBeTruthy();
-        expect(getByText('Tiger King description')).toBeTruthy();
+  it('renders the <Card /> with and clicks the card feature', () => {
+    const { container, queryByText, getByAltText, getByTestId } = render(
+      <Card.Group>
+        {slideRows.map((slideItem) => (
+          <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+            <Card.Title>{slideItem.title}</Card.Title>
+            <Card.Entities>
+              {slideItem.data.map((item) => (
+                <Card.Item key={item.docId} item={item} data-testid={`${item.slug}-item-feature`}>
+                  <Card.Image src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`} />
+                  <Card.Meta>
+                    <Card.SubTitle>{item.title}</Card.SubTitle>
+                    <Card.Text>{item.description}</Card.Text>
+                  </Card.Meta>
+                </Card.Item>
+              ))}
+            </Card.Entities>
+            <Card.Feature category={category}>
+              <Player>
+                <Player.Button />
+                <Player.Video />
+              </Player>
+            </Card.Feature>
+          </Card>
+        ))}
+      </Card.Group>
+    );
 
-        expect(getByText('Feel Good')).toBeTruthy();
-        expect(getByText('Juno')).toBeTruthy();
-        expect(getByText('Juno description')).toBeTruthy();
+    expect(queryByText('18')).toBeFalsy();
+    fireEvent.click(getByTestId('tiger-king-item-feature'));
+    expect(queryByText('18')).toBeTruthy();
 
-        expect(container.firstChild).toMatchSnapshot();
-    });
+    fireEvent.click(getByAltText('Close'));
+    expect(queryByText('18')).toBeFalsy();
 
-    it('renders the <Card /> and toggles the card feature', () => {
-        const { container, queryByText} = render (
-            <Card.Group>
-                {slideRows.map((slideItem) => (
-                    <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
-                        <Card.Title>{slideItem.title}</Card.Title>
-                        <Card.Entities>
-                            {slideItem.data.map((item) => (
-                                <Card.Item key={item.docId} item={item}>
-                                    <Card.Image 
-                                        src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
-                                    />
-                                    <Card.Meta>
-                                        <Card.SubTitle>{item.title}</Card.SubTitle>
-                                        <Card.Text>{item.description}</Card.Text>
-                                    </Card.Meta>
-                                </Card.Item>
-                            ))}
-                        </Card.Entities>
+    expect(queryByText('PG')).toBeFalsy();
+    fireEvent.click(getByTestId('juno-item-feature'));
+    expect(queryByText('PG')).toBeTruthy();
 
-                        <Card.Feature category={category}>
-                            <Player>
-                                <Player.Button />
-                                <Player.Video src="/videos/bunny.mp4"/>
-                            </Player>
-                        </Card.Feature>
-
-                    </Card>
-                ))}
-            </Card.Group>
-        );
-
-        expect(queryByText('18')).toBeTruthy();
-       
-    });
+    fireEvent.click(getByAltText('Close'));
+    expect(queryByText('PG')).toBeFalsy();
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });
