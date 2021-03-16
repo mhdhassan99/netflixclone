@@ -9,7 +9,7 @@ jest.mock('react-router-dom', () => ({
 
   ...jest.requireActual('react-router-dom'),
   useHistory: () => ({}),
-  
+
 }));
 
 const firebase = {
@@ -23,4 +23,35 @@ const firebase = {
   })),
 
 };
+
+describe('<SignUp />', () => {
+
+  it('renders the sign up page with a form submission', async () => {
+
+    const { getByTestId, getByPlaceholderText, queryByTestId } = render(
+
+      <Router>
+        <FirebaseContext.Provider value={{ firebase }}>
+          <SignUp />
+        </FirebaseContext.Provider>
+      </Router>
+
+    );
+
+    await act(async () => {
+
+      await fireEvent.change(getByPlaceholderText('First name'), { target: { value: 'John' } });
+      await fireEvent.change(getByPlaceholderText('Email address'), { target: { value: 'john@gmail.com' } });
+      await fireEvent.change(getByPlaceholderText('Password'), { target: { value: 'password' } });
+
+      fireEvent.click(getByTestId('sign-up'));
+
+      expect(getByPlaceholderText('Email address').value).toBe('john@gmail.com');
+      expect(getByPlaceholderText('Password').value).toBe('password');
+
+      expect(queryByTestId('error')).toBeFalsy();
+
+    });
+  });
+});
 
